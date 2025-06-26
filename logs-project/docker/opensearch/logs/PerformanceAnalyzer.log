@@ -1,0 +1,8 @@
+Exception in thread "main" java.lang.IllegalArgumentException: cannot add context to list
+	at jdk.httpserver/sun.net.httpserver.ContextList.add(ContextList.java:37)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl.createContext(ServerImpl.java:275)
+	at jdk.httpserver/sun.net.httpserver.HttpServerImpl.createContext(HttpServerImpl.java:74)
+	at jdk.httpserver/sun.net.httpserver.HttpServerImpl.createContext(HttpServerImpl.java:39)
+	at org.opensearch.performanceanalyzer.PerformanceAnalyzerApp.createClientServers(PerformanceAnalyzerApp.java:354)
+	at org.opensearch.performanceanalyzer.PerformanceAnalyzerApp.createClientServers(PerformanceAnalyzerApp.java:319)
+	at org.opensearch.performanceanalyzer.PerformanceAnalyzerApp.main(PerformanceAnalyzerApp.java:112)

@@ -1,0 +1,43 @@
+services:
+  opensearch:
+    image: opensearchproject/opensearch:2.19.1
+    container_name: opensearch
+    restart: unless-stopped
+    environment:
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - OPENSEARCH_JAVA_OPTS=${OPENSEARCH_JAVA_OPTS}
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD}
+      - plugins.security.ssl.http.enabled=false
+      - logger.level=WARN
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources:
+        limits:
+          memory: 2g
+    volumes:
+      - ${OPENSEARCH_DATA}:/usr/share/opensearch/data
+      - ./logs:/usr/share/opensearch/logs
+    networks:
+      - shared_network
+    ports:
+      - "9200:9200"
+
+volumes:
+  opensearch_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${OPENSEARCH_DATA}
+      o: bind
+networks:
+  shared_network:
+    external: true
